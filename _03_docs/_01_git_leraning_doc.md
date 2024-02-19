@@ -36,5 +36,11 @@ git status
 ## 查看提交历史记录
 
 ```git
-git log [–pretty=oneline] //可选项表示单行显示日志
+git log [--pretty=oneline] //可选项表示单行显示日志
 ```
+
+
+
+## 版本回退
+
+
