@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-sdsssssss
-sjsjsjs
-=======
-创建了一个123文件
->>>>>>> refs/remotes/origin/master
