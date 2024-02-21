@@ -66,4 +66,12 @@ git checkout -- file_name
 git rm file_name //删除指定文件,即使我们使用系统文件管理器删除了也需要执行这一步
 ```
 
+## 比较不同文件版本之间的差异diff
+
+```git
+git diff
+```
+
+`git diff`结果解析详见：[Git-git diff命令结果解析-CSDN博客](https://blog.csdn.net/CSDN___LYY/article/details/102555882 "Git-git diff命令结果解析-CSDN博客")
+
 
