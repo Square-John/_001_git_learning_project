@@ -43,8 +43,6 @@ git reset --hard HEAD^^ //回退2个版本
 git reset --hard HEAD~100 //回退100个版本
 ```
 
-
-
 ## 回退之后在回退到新版本
 
 ```git
@@ -54,24 +52,18 @@ git reflog //查看所有版本号
 git reset --hard 版本号 //回退到指定版本
 ```
 
-
-
 ## Git撤销修改文件操作
 
 ```git
-git checkout --file_name 
+git checkout -- file_name 
 //撤销对工作区中file_name文件的修改，暂存区有新版本就恢复到暂存区版本状态，
 //否则恢复到仓库版本状态
-
 ```
-
-
 
 ## Git删除文件操作
 
 ```git
-//工作区中如果删除了某个文件，可以通过commit保证新版本仓库中也同样删除该文件
-//在没有
+git rm file_name //删除指定文件,即使我们使用系统文件管理器删除了也需要执行这一步
 ```
 
 
