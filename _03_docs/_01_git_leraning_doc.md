@@ -116,3 +116,77 @@ git merge [branch] //合并指定分支到当前分支
 
 git rebase master //将当前分支变基合并到master分支
 ```
+
+> **注意：**
+> 
+> - *如果修改（包括未暂存、已暂存）和待切换的分支没有冲突，则切换成果，且未提交修改会一起带过去，所以要注意！*
+> 
+> - *如果有冲突，则会报错，提示先提交或隐藏，关于隐藏可查看后续章节内容“stash”。*
+
+## 
+
+## 远程仓库操作
+
+
+
+### 远程用户登录：SSH
+
+- **生成公私钥**
+
+```bash
+ssh-keygen -t rsa //生成公私钥，默认在C:\Users\用户名\.ssh目录
+```
+
+- **配置公钥**
+  
+  > 1. 打开`id_rsa.pub`文件，复制内容。Github上，打开`Setting`➤ `SSH and GPG keys` ➤ `SSH keys` ➤ 按钮`New SSH key`，标题（Title）随意，秘钥内容粘贴进去即可
+  > 
+  > 2. SSH配置完后，可用`ssh -T git@github.com`来检测是否连接成功。
+
+
+
+### 远程仓库指令
+
+```git
+git clone repo_addr //克隆远程仓库到本地
+
+
+git remote -v //查看所有远程仓库，不带参数-v只显示名称
+
+
+git remote show [remote] //显示某个远程仓库的信息
+
+
+git remote add [name] [url] //增加一个新的远程仓库，并命名
+
+git remote rename [old] [new] //修改远程仓库名称
+
+git pull [remote] [branch]	//取回远程仓库的变化，并与本地版本合并
+
+git pull	//同上，针对当前分支
+
+git fetch [remote]	//获取远程仓库的所有变动到本地仓库，不会自动合并！需要手动合并
+
+git push <远程主机名> <本地分支名>:<远程分支名>
+//将<本地分支名>的代码推送到<远程主机名>中的<远程分支名>上
+
+
+//如果本地分支名和远程分支名一样的情况下，可以省略:<远程分支名>。
+//如果远程主机中不存在该分支，那么会被创建。
+git push origin dev //即git push origin dev:dev
+
+//如果本地分支已经跟远程分支建立了追踪关系，那么可以省略<本地分支名>和:<远程分支名>
+//如果本地master和origin/master已经建立了关联
+git push origin //相当于git push origin master:master
+
+//我们只需要保证本地仓库只跟一台远程主机有关联，同时<本地分支名>已经和<远程分支名>关联
+//可以省略远程主机名
+git push //相当于将当前所在本地分支内容推送到唯一远程主机和当前分支关联的远程分支上
+
+git push --set-upstream origin feature
+//将本地feature分支推送到origin远程仓库feature分支上，同时本地分支和远程分支建立关联
+//如果远程分支没有feature分支，则会新建一个
+
+
+
+```
