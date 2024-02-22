@@ -127,8 +127,6 @@ git rebase master //将当前分支变基合并到master分支
 
 ## 远程仓库操作
 
-
-
 ### 远程用户登录：SSH
 
 - **生成公私钥**
@@ -142,8 +140,6 @@ ssh-keygen -t rsa //生成公私钥，默认在C:\Users\用户名\.ssh目录
   > 1. 打开`id_rsa.pub`文件，复制内容。Github上，打开`Setting`➤ `SSH and GPG keys` ➤ `SSH keys` ➤ 按钮`New SSH key`，标题（Title）随意，秘钥内容粘贴进去即可
   > 
   > 2. SSH配置完后，可用`ssh -T git@github.com`来检测是否连接成功。
-
-
 
 ### 远程仓库指令
 
@@ -161,11 +157,11 @@ git remote add [name] [url] //增加一个新的远程仓库，并命名
 
 git remote rename [old] [new] //修改远程仓库名称
 
-git pull [remote] [branch]	//取回远程仓库的变化，并与本地版本合并
+git pull [remote] [branch]    //取回远程仓库的变化，并与本地版本合并
 
-git pull	//同上，针对当前分支
+git pull    //同上，针对当前分支
 
-git fetch [remote]	//获取远程仓库的所有变动到本地仓库，不会自动合并！需要手动合并
+git fetch [remote]    //获取远程仓库的所有变动到本地仓库，不会自动合并！需要手动合并
 
 git push <远程主机名> <本地分支名>:<远程分支名>
 //将<本地分支名>的代码推送到<远程主机名>中的<远程分支名>上
@@ -186,7 +182,36 @@ git push //相当于将当前所在本地分支内容推送到唯一远程主机
 git push --set-upstream origin feature
 //将本地feature分支推送到origin远程仓库feature分支上，同时本地分支和远程分支建立关联
 //如果远程分支没有feature分支，则会新建一个
-
-
-
 ```
+
+## 处理冲突<<<<<<< HEAD
+
+> - 在有冲突的文件中，`<<<<<<< HEAD`开头的内容就表示是有冲突的部分，需要人工处理。
+>   
+>   
+> 
+> - `=======`分割线上方是当前分支的内容，下方是被合并分支的变更内容。
+>   
+>   
+> 
+> - 冲突处理完成后将冲突文件重新`add`和`commit`即可完成冲突处理
+
+
+
+
+
+## 后悔指令
+
+| 命令                          | 描述                                                        |
+| --------------------------- | --------------------------------------------------------- |
+| `git checkout .`            | 撤销工作区的（未暂存）修改，把暂存区的修改还原到工作区。不会影响暂存区，如果需要清空，删除所有文件后再执行这个命令 |
+| `git checkout [file]`       | 同上，file指定文件名                                              |
+| `git checkout HEAD .`       | 撤销工作区、暂存区的修改，用HEAD中指向的提交历史来替换掉工作区、暂存区                     |
+| `git checkout HEAD [file]`  | 同上，file指定文件名                                              |
+| `git reset`                 | 把缓冲区恢复到最近一次commit, 不影响工作区                                 |
+| `git reset HEAD [file]`     | 同上, file指定文件名, HEAD可省略                                    |
+| `git reset [commit]`        | 回退到指定版本, 丢弃之后版本, 不影响工作区。工作目录里面对应checkout出来                |
+| `git reset --soft [commit]` | 保持分支master, HEAD到制定版本处。不影 响暂存区、工作目录。需要对checkout出来         |
+| `git reset --hard HEAD^`    | 撤销本次提交, 且不保留修改内容。回退到前一 版本，并且重置了工作、缓冲和内容                   |
+| `git reset --hard HEAD~n`   | 回退到指定版本，并且重置了缓冲和内容                                        |
+| `git revert[commit]`        | 取消某个提交，在当前一个新的提交（撤销某次 提交）生成一个新的提交记录，如果已经Push则 需要再push回去   |
