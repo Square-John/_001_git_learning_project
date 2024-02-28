@@ -127,8 +127,6 @@ git rebase master //将当前分支变基合并到master分支
 
 ## 远程仓库操作
 
-
-
 ### 远程用户登录：SSH
 
 - **生成公私钥**
@@ -142,8 +140,6 @@ ssh-keygen -t rsa //生成公私钥，默认在C:\Users\用户名\.ssh目录
   > 1. 打开`id_rsa.pub`文件，复制内容。Github上，打开`Setting`➤ `SSH and GPG keys` ➤ `SSH keys` ➤ 按钮`New SSH key`，标题（Title）随意，秘钥内容粘贴进去即可
   > 
   > 2. SSH配置完后，可用`ssh -T git@github.com`来检测是否连接成功。
-
-
 
 ### 远程仓库指令
 
@@ -161,11 +157,11 @@ git remote add [name] [url] //增加一个新的远程仓库，并命名
 
 git remote rename [old] [new] //修改远程仓库名称
 
-git pull [remote] [branch]	//取回远程仓库的变化，并与本地版本合并
+git pull [remote] [branch]    //取回远程仓库的变化，并与本地版本合并
 
-git pull	//同上，针对当前分支
+git pull    //同上，针对当前分支
 
-git fetch [remote]	//获取远程仓库的所有变动到本地仓库，不会自动合并！需要手动合并
+git fetch [remote]    //获取远程仓库的所有变动到本地仓库，不会自动合并！需要手动合并
 
 git push <远程主机名> <本地分支名>:<远程分支名>
 //将<本地分支名>的代码推送到<远程主机名>中的<远程分支名>上
@@ -186,7 +182,23 @@ git push //相当于将当前所在本地分支内容推送到唯一远程主机
 git push --set-upstream origin feature
 //将本地feature分支推送到origin远程仓库feature分支上，同时本地分支和远程分支建立关联
 //如果远程分支没有feature分支，则会新建一个
-
-
-
 ```
+
+## 标签管理
+
+| 命令                            | 描述                                |
+| ----------------------------- | --------------------------------- |
+| git tag                       | 查看标签列表                            |
+| git tag -l 'a*'               | 查看名称带 “a” 开头的标签列表, “*”为通配符 可省略    |
+| git show [tagname]            | 查看某个标签信息                          |
+| git tag [tagname]             | 创建一个标签, 默认情况下打上去的是最新提交的 commit 上的 |
+| git tag [tagname] [commit id] | 打在一个tag在指定commit上                 |
+| git tag -a v5.1 -m'v5.1版本'    | 创建带有说明的标签，-a指定标签名，-m指定说明文字        |
+| git tag -d [tagname]          | 删除本地某个标签                          |
+| git checkout v5.1.1039        | 切换到某一版本，可以用来发布之前版本                |
+| git push [remote] v5.1        | 推送某个版本，有点像人肉回滚代码(推荐推送到服务器)        |
+| git push [remote] --tags      | 推送所有tag                           |
+
+**如果要推送某个标签到远程，使用命令`git push origin [tagname]`，或者，一次性推送全部到远程：`git push origin --tags`**
+
+> 注意：标签总是和某个commit挂钩。如果这个commit既出现在master分支，又出现在dev分支，那么在这两个分支上都可以看到这个标签。
